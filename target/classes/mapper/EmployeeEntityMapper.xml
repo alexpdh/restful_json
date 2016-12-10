@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pengdh.dao.EmployeeDao">
+  <resultMap id="BaseResultMap" type="com.pengdh.entity.EmployeeEntity">
+    <id column="emp_id" jdbcType="BIGINT" property="empId" />
+    <result column="depart_id" jdbcType="BIGINT" property="departId" />
+    <result column="depart_name" jdbcType="VARCHAR" property="departName" />
+    <result column="emp_name" jdbcType="VARCHAR" property="empName" />
+    <result column="gender" jdbcType="VARCHAR" property="gender" />
+    <result column="birth_date" jdbcType="TIMESTAMP" property="birthDate" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="grade" jdbcType="VARCHAR" property="grade" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    emp_id, depart_id, depart_name, emp_name, gender, birth_date, title, grade
+  </sql>
+  
+  <select id="queryEmployList" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tf_f_employee limit #{offset},#{limit}
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tf_f_employee
+    where emp_id = #{empId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from tf_f_employee
+    where emp_id = #{empId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.pengdh.entity.EmployeeEntity">
+    insert into tf_f_employee (emp_id, depart_id, depart_name, 
+      emp_name, gender, birth_date, 
+      title, grade)
+    values (#{empId,jdbcType=BIGINT}, #{departId,jdbcType=BIGINT}, #{departName,jdbcType=VARCHAR}, 
+      #{empName,jdbcType=VARCHAR}, #{gender,jdbcType=VARCHAR}, #{birthDate,jdbcType=TIMESTAMP}, 
+      #{title,jdbcType=VARCHAR}, #{grade,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.pengdh.entity.EmployeeEntity">
+    insert into tf_f_employee
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="empId != null">
+        emp_id,
+      </if>
+      <if test="departId != null">
+        depart_id,
+      </if>
+      <if test="departName != null">
+        depart_name,
+      </if>
+      <if test="empName != null">
+        emp_name,
+      </if>
+      <if test="gender != null">
+        gender,
+      </if>
+      <if test="birthDate != null">
+        birth_date,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="grade != null">
+        grade,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="empId != null">
+        #{empId,jdbcType=BIGINT},
+      </if>
+      <if test="departId != null">
+        #{departId,jdbcType=BIGINT},
+      </if>
+      <if test="departName != null">
+        #{departName,jdbcType=VARCHAR},
+      </if>
+      <if test="empName != null">
+        #{empName,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null">
+        #{gender,jdbcType=VARCHAR},
+      </if>
+      <if test="birthDate != null">
+        #{birthDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="grade != null">
+        #{grade,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.pengdh.entity.EmployeeEntity">
+    update tf_f_employee
+    <set>
+      <if test="departId != null">
+        depart_id = #{departId,jdbcType=BIGINT},
+      </if>
+      <if test="departName != null">
+        depart_name = #{departName,jdbcType=VARCHAR},
+      </if>
+      <if test="empName != null">
+        emp_name = #{empName,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null">
+        gender = #{gender,jdbcType=VARCHAR},
+      </if>
+      <if test="birthDate != null">
+        birth_date = #{birthDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="grade != null">
+        grade = #{grade,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where emp_id = #{empId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.pengdh.entity.EmployeeEntity">
+    update tf_f_employee
+    set depart_id = #{departId,jdbcType=BIGINT},
+      depart_name = #{departName,jdbcType=VARCHAR},
+      emp_name = #{empName,jdbcType=VARCHAR},
+      gender = #{gender,jdbcType=VARCHAR},
+      birth_date = #{birthDate,jdbcType=TIMESTAMP},
+      title = #{title,jdbcType=VARCHAR},
+      grade = #{grade,jdbcType=VARCHAR}
+    where emp_id = #{empId,jdbcType=BIGINT}
+  </update>
+</mapper>

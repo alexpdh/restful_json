@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pengdh.dao.DepartCMCDao">
+  <resultMap id="BaseResultMap" type="com.pengdh.entity.DepartCMCEntity">
+    <id column="depart_id" jdbcType="BIGINT" property="departId" />
+    <result column="depart_name" jdbcType="VARCHAR" property="departName" />
+    <result column="location" jdbcType="VARCHAR" property="location" />
+    <result column="manager" jdbcType="VARCHAR" property="manager" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    depart_id, depart_name, location, manager
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from td_m_depart_cmc
+    where depart_id = #{departId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from td_m_depart_cmc
+    where depart_id = #{departId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.pengdh.entity.DepartCMCEntity">
+    insert into td_m_depart_cmc (depart_id, depart_name, location, 
+      manager)
+    values (#{departId,jdbcType=BIGINT}, #{departName,jdbcType=VARCHAR}, #{location,jdbcType=VARCHAR}, 
+      #{manager,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.pengdh.entity.DepartCMCEntity">
+    insert into td_m_depart_cmc
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="departId != null">
+        depart_id,
+      </if>
+      <if test="departName != null">
+        depart_name,
+      </if>
+      <if test="location != null">
+        location,
+      </if>
+      <if test="manager != null">
+        manager,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="departId != null">
+        #{departId,jdbcType=BIGINT},
+      </if>
+      <if test="departName != null">
+        #{departName,jdbcType=VARCHAR},
+      </if>
+      <if test="location != null">
+        #{location,jdbcType=VARCHAR},
+      </if>
+      <if test="manager != null">
+        #{manager,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.pengdh.entity.DepartCMCEntity">
+    update td_m_depart_cmc
+    <set>
+      <if test="departName != null">
+        depart_name = #{departName,jdbcType=VARCHAR},
+      </if>
+      <if test="location != null">
+        location = #{location,jdbcType=VARCHAR},
+      </if>
+      <if test="manager != null">
+        manager = #{manager,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where depart_id = #{departId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.pengdh.entity.DepartCMCEntity">
+    update td_m_depart_cmc
+    set depart_name = #{departName,jdbcType=VARCHAR},
+      location = #{location,jdbcType=VARCHAR},
+      manager = #{manager,jdbcType=VARCHAR}
+    where depart_id = #{departId,jdbcType=BIGINT}
+  </update>
+</mapper>

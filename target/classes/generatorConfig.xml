@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >  
+
+<!-- 选择pom.xml文件，击右键先择Run AS——>Maven Build… ——>在Goals框中输入：mybatis-generator:generate
+ -->
+<generatorConfiguration>  
+    <!-- 引入配置文件 -->  
+    <properties resource="generator.properties"/>  
+      
+    <!-- 指定数据连接驱动jar地址 -->  
+    <classPathEntry location="${classPath}" />  
+      
+    <!-- 一个数据库一个context -->  
+    <context id="restfultables">  
+        <!-- 注释 -->  
+        <commentGenerator >
+        	<!-- 是否取消注释 -->
+            <property name="suppressAllComments" value="true"/> 
+            <!-- 是否生成注释代时间戳--> 
+            <property name="suppressDate" value="true" />   
+        </commentGenerator>  
+          
+        <!-- jdbc连接 -->  
+        <!--数据库链接URL，用户名、密码 -->
+		<jdbcConnection driverClass="${jdbc_driver}"
+			connectionURL="${jdbc_url}" 
+			userId="${jdbc_user}" password="${jdbc_password}">
+		</jdbcConnection>
+              
+        <!-- <connectionFactory>
+  			<property name="driverClass" value="${jdbc_driver}"/>
+  			<property name="connectionURL" value="${jdbc_url}"/>
+  			<property name="userId" value="${jdbc_user}"/>
+  			<property name="password" value="${jdbc_password}"/>
+		</connectionFactory> -->  
+        <!-- 类型转换 -->  
+        <javaTypeResolver>  
+            <!-- 是否使用bigDecimal， false可自动转化以下类型（Long, Integer, Short, etc.） -->  
+            <property name="forceBigDecimals" value="false"/>  
+        </javaTypeResolver>  
+          
+        <!-- 生成实体类地址 -->    
+        <javaModelGenerator targetPackage="com.pengdh.model"  
+            targetProject="com.pengdh:restful_json:war:0.0.1-SNAPSHOT" >  
+            <!-- 是否在当前路径下新加一层schema,eg：fase路径com.oop.eksp.user.model， true:com.oop.eksp.user.model.[schemaName] -->  
+            <property name="enableSubPackages" value="false"/>  
+            <!-- 是否针对string类型的字段在set的时候进行trim调用 -->  
+            <property name="trimStrings" value="true"/>  
+        </javaModelGenerator>  
+          
+        <!-- 生成mapxml文件 -->  
+        <sqlMapGenerator targetPackage="mapper"  
+            targetProject="${mapper}" >  
+            <!-- 是否在当前路径下新加一层schema,eg：fase路径com.oop.eksp.user.model， true:com.oop.eksp.user.model.[schemaName] -->  
+            <property name="enableSubPackages" value="true" />  
+        </sqlMapGenerator>  
+          
+        <!-- 生成mapxml对应client，也就是接口dao -->      
+        <javaClientGenerator targetPackage="com.pengdh.dao"  
+            targetProject="com.pengdh:restful_json:war:0.0.1-SNAPSHOT" type="XMLMAPPER" >  
+            <!-- 是否在当前路径下新加一层schema,eg：fase路径com.oop.eksp.user.model， true:com.oop.eksp.user.model.[schemaName] -->  
+            <property name="enableSubPackages" value="true" />  
+        </javaClientGenerator>  
+          
+        <!-- 配置表信息 -->      
+        <table schema="${dbName}" tableName="td_m_depart"  
+            domainObjectName="DepartEntity" enableCountByExample="false"  
+            enableDeleteByExample="false" enableSelectByExample="false"  
+            enableUpdateByExample="false">  
+            <!-- schema即为数据库名 tableName为对应的数据库表 domainObjectName是要生成的实体类 enable*ByExample   
+                是否生成 example类   -->  
+        </table>  
+        <table schema="${dbName}" tableName="td_m_depart_cuc"  
+            domainObjectName="DepartCUCEntity" enableCountByExample="false"  
+            enableDeleteByExample="false" enableSelectByExample="false"  
+            enableUpdateByExample="false">  
+            <!-- schema即为数据库名 tableName为对应的数据库表 domainObjectName是要生成的实体类 enable*ByExample   
+                是否生成 example类   -->  
+        </table>
+        <table schema="${dbName}" tableName="td_m_depart_cmc"  
+            domainObjectName="DepartCMCEntity" enableCountByExample="false"  
+            enableDeleteByExample="false" enableSelectByExample="false"  
+            enableUpdateByExample="false">  
+            <!-- schema即为数据库名 tableName为对应的数据库表 domainObjectName是要生成的实体类 enable*ByExample   
+                是否生成 example类   -->  
+        </table>
+        <table schema="${dbName}" tableName="td_m_depart_ctc"  
+            domainObjectName="DepartCTCEntity" enableCountByExample="false"  
+            enableDeleteByExample="false" enableSelectByExample="false"  
+            enableUpdateByExample="false">  
+            <!-- schema即为数据库名 tableName为对应的数据库表 domainObjectName是要生成的实体类 enable*ByExample   
+                是否生成 example类   -->  
+        </table>
+        <table schema="${dbName}" tableName="tf_f_employee"  
+            domainObjectName="EmployeeEntity" enableCountByExample="false"  
+            enableDeleteByExample="false" enableSelectByExample="false"  
+            enableUpdateByExample="false">  
+            <!-- schema即为数据库名 tableName为对应的数据库表 domainObjectName是要生成的实体类 enable*ByExample   
+                是否生成 example类   -->  
+        </table>
+  
+    </context>  
+</generatorConfiguration>
